@@ -26,7 +26,7 @@ Data Cleaning Steps: Special characters (e.g., '$', '-') were removed, empty str
 
 **Gross Sales vs. Manufacturing Price**: Higher manufacturing prices are generally correlated with increased gross sales, indicating possible premium pricing strategies for certain products.[view here](Screenshot 2024-11-15 050534.png)
 
-**Top Performing Segments**: Specific segments consistently generate the highest profits, providing a target for marketing and sales focus.[view here]
+**Top Performing Segments**: Specific segments consistently generate the highest profits, providing a target for marketing and sales focus.[view here](image.png)
 
 **Seasonal Effects on Sales**: Sales increase notably during certain seasons, underscoring the need for seasonal inventory and pricing adjustments."[view here]
 
