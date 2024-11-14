@@ -20,16 +20,15 @@ Data Cleaning Steps: Special characters (e.g., '$', '-') were removed, empty str
 
 **4.Insights Deep Dive**
 
-**Monthly Numerical Trends**: Significant fluctuations are observed in key financial metrics, such as gross sales, which vary by month and are influenced by seasonal demand.[View here].
+**Monthly Numerical Trends**: Significant fluctuations are observed in key financial metrics, such as gross sales, which vary by month and are influenced by seasonal demand.
 
-**Discount Analysis**: There is a positive correlation between discounts and sales, implying that discounts boost sales volume; however, their impact varies across different segments and regions.[view here](image.png)
+**Discount Analysis**: There is a positive correlation between discounts and sales, implying that discounts boost sales volume; however, their impact varies across different segments and regions.[view here](Discount)
 
-**Gross Sales vs. Manufacturing Price**: Higher manufacturing prices are generally correlated with increased gross sales, indicating possible premium pricing strategies for certain products.[view here](Screenshot 2024-11-15 050534.png)
+**Gross Sales vs. Manufacturing Price**: Higher manufacturing prices are generally correlated with increased gross sales, indicating possible premium pricing strategies for certain products.[view here](grosssale)
 
-**Top Performing Segments**: Specific segments consistently generate the highest profits, providing a target for marketing and sales focus.[view here](image.png)
+**Top Performing Segments**: Specific segments consistently generate the highest profits, providing a target for marketing and sales focus.[view here](Segment)
 
-**Seasonal Effects on Sales**: Sales increase notably during certain seasons, underscoring the need for seasonal inventory and pricing adjustments."[view here]
-
+**Seasonal Effects on Sales**: Sales increase notably during certain seasons, underscoring the need for seasonal inventory and pricing adjustments.[view here](seasonal)
 **5. Recommendation**
 "Based on the findings, we recommend the following:
 
