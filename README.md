@@ -24,11 +24,12 @@ Data Cleaning Steps: Special characters (e.g., '$', '-') were removed, empty str
 
 **Discount Analysis**: There is a positive correlation between discounts and sales, implying that discounts boost sales volume; however, their impact varies across different segments and regions.[view here](Discount)
 
-**Gross Sales vs. Manufacturing Price**: Higher manufacturing prices are generally correlated with increased gross sales, indicating possible premium pricing strategies for certain products.[view here](grosssale)
+**Gross Sales vs. Manufacturing Price**: Higher manufacturing prices are generally correlated with increased gross sales, indicating possible premium pricing strategies for certain products.[view here](gross_sale)
 
 **Top Performing Segments**: Specific segments consistently generate the highest profits, providing a target for marketing and sales focus.[view here](Segment)
 
 **Seasonal Effects on Sales**: Sales increase notably during certain seasons, underscoring the need for seasonal inventory and pricing adjustments.[view here](seasonal)
+
 **5. Recommendation**
 "Based on the findings, we recommend the following:
 
