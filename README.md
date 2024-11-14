@@ -27,7 +27,7 @@ Data Cleaning Steps: Special characters (e.g., '$', '-') were removed, empty str
 
 **Monthly Numerical Trends**: Significant fluctuations are observed in key financial metrics, such as gross sales, which vary by month and are influenced by seasonal demand.
 
-**Discount Analysis**: There is a positive correlation between discounts and sales, implying that discounts boost sales volume; however, their impact varies across different segments and regions.[view here](Discount)
+**Discount Analysis**: There is a positive correlation between discounts and sales, implying that discounts boost sales volume; however, their impact varies across different segments and regions.[view here](discount)
 
 **Gross Sales vs. Manufacturing Price**: Higher manufacturing prices are generally correlated with increased gross sales, indicating possible premium pricing strategies for certain products.[view here](gross_sale)
 
