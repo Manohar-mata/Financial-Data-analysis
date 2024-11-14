@@ -18,18 +18,25 @@ Data Cleaning Steps: Special characters (e.g., '$', '-') were removed, empty str
 
 "The analysis indicates that certain segments are more profitable, while discounts correlate with increased sales but vary in effectiveness across regions. Key patterns show that seasonality impacts sales significantly, with peak sales occurring in specific months. Additionally, manufacturing price adjustments correlate with variations in gross sales, suggesting potential for optimizing pricing strategies."
 
-4. Insights Deep Dive
+**4.Insights Deep Dive**
 
-Monthly Numerical Trends: Significant fluctuations are observed in key financial metrics, such as gross sales, which vary by month and are influenced by seasonal demand.[View here](
-Discount Analysis: There is a positive correlation between discounts and sales, implying that discounts boost sales volume; however, their impact varies across different segments and regions.[view here]()
-Gross Sales vs. Manufacturing Price: Higher manufacturing prices are generally correlated with increased gross sales, indicating possible premium pricing strategies for certain products.[view here]
-Top Performing Segments: Specific segments consistently generate the highest profits, providing a target for marketing and sales focus.[view here]
-Seasonal Effects on Sales: Sales increase notably during certain seasons, underscoring the need for seasonal inventory and pricing adjustments."[view here]
+**Monthly Numerical Trends**: Significant fluctuations are observed in key financial metrics, such as gross sales, which vary by month and are influenced by seasonal demand.[View here].
 
-5. Recommendation
+**Discount Analysis**: There is a positive correlation between discounts and sales, implying that discounts boost sales volume; however, their impact varies across different segments and regions.[view here]()
+
+**Gross Sales vs. Manufacturing Price**: Higher manufacturing prices are generally correlated with increased gross sales, indicating possible premium pricing strategies for certain products.[view here]
+
+**Top Performing Segments**: Specific segments consistently generate the highest profits, providing a target for marketing and sales focus.[view here]
+
+**Seasonal Effects on Sales**: Sales increase notably during certain seasons, underscoring the need for seasonal inventory and pricing adjustments."[view here]
+
+**5. Recommendation**
 "Based on the findings, we recommend the following:
 
-Discount Optimization: Apply discounts strategically in regions where they significantly boost sales, particularly in high-performing segments.
-Seasonal Planning: Prepare for peak seasons by adjusting inventory and staffing levels to maximize sales during high-demand periods.
-Profit Maximization in Key Segments: Focus on the top-performing segments for targeted growth strategies, especially for premium-priced products.
-Refine Pricing Strategy: Consider adjusting manufacturing prices to leverage the positive correlation with gross sales, particularly in premium product lines."
+**Discount Optimization**: Apply discounts strategically in regions where they significantly boost sales, particularly in high-performing segments.
+
+**Seasonal Planning**: Prepare for peak seasons by adjusting inventory and staffing levels to maximize sales during high-demand periods.
+
+**Profit Maximization in Key Segments**: Focus on the top-performing segments for targeted growth strategies, especially for premium-priced products.
+
+**Refine Pricing Strategy**: Consider adjusting manufacturing prices to leverage the positive correlation with gross sales, particularly in premium product lines."
