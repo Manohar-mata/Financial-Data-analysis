@@ -1,9 +1,9 @@
 # Financial-Data-analysis
-1. Background and Overview
+**1. Background and Overview**
 
 "This finance data analysis project explores various financial metrics across different segments, focusing on sales, discounts, and profit margins. By analyzing trends over time and across regions, we aim to uncover insights that can guide decision-making in sales strategies, pricing, and profit optimization."
 
-2. Data Structure Overview
+**2. Data Structure Overview**
 
 "The dataset contains columns such as:
 
@@ -14,7 +14,7 @@ Segment: Customer or product segment.
 Country: Geographical location of sales.
 Data Cleaning Steps: Special characters (e.g., '$', '-') were removed, empty strings were replaced with NaN values, and necessary conversions were made to ensure data consistency, such as converting object data types to integers."
 
-3. Executive Summary
+**3. Executive Summary**
 
 "The analysis indicates that certain segments are more profitable, while discounts correlate with increased sales but vary in effectiveness across regions. Key patterns show that seasonality impacts sales significantly, with peak sales occurring in specific months. Additionally, manufacturing price adjustments correlate with variations in gross sales, suggesting potential for optimizing pricing strategies."
 
@@ -22,7 +22,7 @@ Data Cleaning Steps: Special characters (e.g., '$', '-') were removed, empty str
 
 **Monthly Numerical Trends**: Significant fluctuations are observed in key financial metrics, such as gross sales, which vary by month and are influenced by seasonal demand.[View here].
 
-**Discount Analysis**: There is a positive correlation between discounts and sales, implying that discounts boost sales volume; however, their impact varies across different segments and regions.[view here]()
+**Discount Analysis**: There is a positive correlation between discounts and sales, implying that discounts boost sales volume; however, their impact varies across different segments and regions.[view here](image.png)
 
 **Gross Sales vs. Manufacturing Price**: Higher manufacturing prices are generally correlated with increased gross sales, indicating possible premium pricing strategies for certain products.[view here]
 
