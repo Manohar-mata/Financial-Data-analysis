@@ -1,4 +1,5 @@
 Numpy
 Pandas
 Seaborn
-matplot
+Matplot
+plotly
