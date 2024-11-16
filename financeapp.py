@@ -1,164 +1,121 @@
-# finance_streamlit.py
 
 import streamlit as st
 import pandas as pd
+import numpy as np
+import warnings
 import matplotlib.pyplot as plt
 import seaborn as sns
-import numpy as np
 
-# Configure Streamlit page
-st.set_page_config(page_title="Financial Data Analysis", layout="wide")
 
-# Load the dataset
-st.title("Financial Data Analysis")
-st.sidebar.header("Upload Your Dataset")
-uploaded_file = st.sidebar.file_uploader("Upload CSV file", type=["csv"])
+st.title("Sales Data Analysis Dashboard")
 
-if uploaded_file:
-    # Read the uploaded file
-    df = pd.read_csv(uploaded_file)
+# Upload data file
+uploaded_file = st.file_uploader("Financials.csv", type="csv")
 
-    # Cleaning column names
-    df.rename(columns={
-        'Segment': 'segment',
-        'Country': 'country',
-        ' Product ': 'product',
-        ' Discount Band ': 'discount_band',
-        ' Units Sold ': 'units_sold($)',
-        ' Manufacturing Price ': 'manufacturing_price($)',
-        ' Sale Price ': 'sale_price($)',
-        ' Gross Sales ': 'gross_sales($)',
-        ' Discounts ': 'discounts($)',
-        '  Sales ': 'sales($)',
-        ' COGS ': 'cogs($)',
-        ' Profit ': 'profit($)',
-        'Date': 'date',
-        'Month Number': 'month_number',
-        ' Month Name ': 'month_name',
-        'Year': 'year'
-    }, inplace=True)
+if uploaded_file is not None:
+    df_dummy = pd.read_csv(uploaded_file)
 
-    # Cleaning the dataset
-    df.iloc[:, 4:12] = df.iloc[:, 4:12].apply(
+    # Perform data cleaning and preprocessing
+    df_dummy.iloc[:, 4:12] = df_dummy.iloc[:, 4:12].apply(
         lambda x: x.str.replace(',', '')
-                   .str.replace('(', '-')
-                   .str.replace(')', '')
-                   .str.strip()
-                   .replace('-', np.nan)
-                   .replace('', np.nan)
+                 .str.replace('(', '-')
+                 .str.replace(')', '')
+                 .str.strip()
+                 .replace('-', np.nan)
+                 .replace('', np.nan)
     )
 
-    # Converting to numeric types
-    for col in ['manufacturing_price($)', 'sale_price($)', 'gross_sales($)', 'discounts($)', 'sales($)', 'cogs($)', 'profit($)', 'units_sold($)']:
-        df[col] = pd.to_numeric(df[col], errors='coerce')
+    df_dummy['profit($)'] = df_dummy['profit($)'].astype(float)
+    df_dummy['profit($)'] = df_dummy['profit($)'].fillna(df_dummy['profit($)'].mean())
 
-    # Fill NaN in profit with mean
-    df['profit($)'].fillna(df['profit($)'].mean(), inplace=True)
+    df_dummy['manufacturing_price($)'] = df_dummy['manufacturing_price($)'].astype(float)
+    df_dummy['sale_price($)'] = df_dummy['sale_price($)'].astype(float)
+    df_dummy['gross_sales($)'] = df_dummy['gross_sales($)'].astype(float)
+    df_dummy['discounts($)'] = df_dummy['discounts($)'].astype(float)
+    df_dummy['sales($)'] = df_dummy['sales($)'].astype(float)
+    df_dummy['cogs($)'] = df_dummy['cogs($)'].astype(float)
+    df_dummy['profit($)'] = df_dummy['profit($)'].astype(float)
+    df_dummy['units_sold($)'] = df_dummy['units_sold($)'].astype(float)
+    df_dummy['date'] = pd.to_datetime(df_dummy['date'], errors='coerce')
 
-    # Data overview
-    st.header("Dataset Overview")
-    st.write("Shape of the dataset:", df.shape)
-    st.write("First few rows of the dataset:")
-    st.write(df.head())
+    # Descriptive statistics
+    st.subheader("Descriptive Statistics")
+    st.write(df_dummy.describe())
 
-    # Sidebar Filters
-    st.sidebar.header("Filter Options")
-    selected_segment = st.sidebar.multiselect("Select Segment(s)", df['segment'].unique())
-    selected_product = st.sidebar.multiselect("Select Product(s)", df['product'].unique())
-    filtered_df = df.copy()
+    # Visualizations
+    st.subheader("Overall Performance and Trends")
 
-    if selected_segment:
-        filtered_df = filtered_df[filtered_df['segment'].isin(selected_segment)]
-    if selected_product:
-        filtered_df = filtered_df[filtered_df['product'].isin(selected_product)]
+    # Sales by Product and Month
+    sales_by_product_month = df_dummy.groupby(['product', 'month_name'])['sales($)'].sum().unstack()
+    st.bar_chart(sales_by_product_month)
 
-    st.write("Filtered Dataset:")
-    st.write(filtered_df)
+    # Trend in Profitability Across Months
+    profit_by_month = df_dummy.groupby('month_name')['profit($)'].sum()
+    st.line_chart(profit_by_month)
 
-    # Overall Performance Analysis
-    st.header("Overall Performance and Trends")
-    if st.checkbox("Show Sales by Product and Month"):
-        sales_by_product_month = filtered_df.groupby(['product', 'month_name'])['sales($)'].sum().unstack()
-        fig, ax = plt.subplots(figsize=(15, 8))
-        sales_by_product_month.plot(kind='bar', ax=ax)
-        ax.set_title("Sales by Product and Month")
-        ax.set_xlabel("Product")
-        ax.set_ylabel("Total Sales")
-        plt.xticks(rotation=45, ha="right")
-        st.pyplot(fig)
+    # Revenue Contribution by Product
+    product_revenue = df_dummy.groupby('product')['sales($)'].sum().sort_values(ascending=False)
+    st.bar_chart(product_revenue)
 
-    if st.checkbox("Show Profitability Trends Across Months"):
-        profit_by_month = filtered_df.groupby('month_name')['profit($)'].sum()
-        fig, ax = plt.subplots(figsize=(12, 6))
-        ax.plot(profit_by_month.index, profit_by_month.values, marker='o')
-        ax.set_title("Profitability Trends Across Months")
-        ax.set_xlabel("Month")
-        ax.set_ylabel("Total Profit")
-        plt.xticks(rotation=45, ha="right")
-        st.pyplot(fig)
+    # Trend in Unit Sales Across Months
+    units_sold_by_month = df_dummy.groupby('month_name')['units_sold($)'].sum()
+    st.line_chart(units_sold_by_month)
 
-    # Product-Specific Insights
-    st.header("Product-Specific Insights")
-    if st.checkbox("Show Product Sales and Profit"):
-        product_performance = filtered_df.groupby('product').agg({'sales($)': 'sum', 'profit($)': 'sum'})
-        product_performance = product_performance.sort_values('sales($)', ascending=False)
-        fig, ax = plt.subplots(figsize=(15, 8))
-        product_performance[['sales($)', 'profit($)']].plot(kind='bar', ax=ax)
-        ax.set_title("Product Performance: Sales and Profit")
-        ax.set_xlabel("Product")
-        ax.set_ylabel("Total Sales/Profit")
-        plt.xticks(rotation=45, ha="right")
-        st.pyplot(fig)
+    st.subheader("Product-Specific Insights")
 
-    # Segmentation Analysis
-    st.header("Segmentation Analysis")
-    if st.checkbox("Show Revenue Contribution by Segment"):
-        segment_revenue = filtered_df.groupby('segment')['sales($)'].sum().sort_values(ascending=False)
-        fig, ax = plt.subplots(figsize=(12, 6))
-        segment_revenue.plot(kind='bar', ax=ax)
-        ax.set_title("Revenue Contribution by Segment")
-        ax.set_xlabel("Segment")
-        ax.set_ylabel("Total Revenue")
-        plt.xticks(rotation=45, ha="right")
-        st.pyplot(fig)
+    # Product Performance: Sales and Profit
+    product_performance = df_dummy.groupby('product').agg({'sales($)': 'sum', 'profit($)': 'sum'})
+    product_performance = product_performance.sort_values('sales($)', ascending=False)
+    st.bar_chart(product_performance[['sales($)', 'profit($)']])
 
-    if st.checkbox("Show Profit Margin by Segment"):
-        segment_profit_margin = filtered_df.groupby('segment').apply(
-            lambda x: (x['profit($)'].sum() / x['sales($)'].sum()) * 100 if x['sales($)'].sum() > 0 else 0)
-        fig, ax = plt.subplots(figsize=(12, 6))
-        segment_profit_margin.plot(kind='bar', ax=ax)
-        ax.set_title("Profit Margin by Segment")
-        ax.set_xlabel("Segment")
-        ax.set_ylabel("Profit Margin (%)")
-        plt.xticks(rotation=45, ha="right")
-        st.pyplot(fig)
+    st.subheader("Segmentation Analysis")
 
-    # Detailed Financial Analysis
-    st.header("Detailed Financial Analysis")
-    if st.checkbox("Show Product-Specific Sales Distribution"):
-        fig, ax = plt.subplots(figsize=(15, 8))
-        sns.boxplot(data=filtered_df, x='product', y='sales($)', ax=ax)
-        ax.set_title("Sales Distribution by Product")
-        ax.set_xlabel("Product")
-        ax.set_ylabel("Sales")
-        plt.xticks(rotation=45, ha="right")
-        st.pyplot(fig)
+    # Sales Trend Across Months by Segment
+    for segment in df_dummy['segment'].unique():
+        sales_segment_month = df_dummy[df_dummy['segment'] == segment].groupby('month_name')['sales($)'].sum()
+        st.line_chart(sales_segment_month)
 
-    if st.checkbox("Show Discount Impact on Profit"):
-        fig, ax = plt.subplots(figsize=(12, 6))
-        sns.scatterplot(data=filtered_df, x='discounts($)', y='profit($)', hue='segment', ax=ax)
-        ax.set_title("Discounts vs Profit by Segment")
-        ax.set_xlabel("Discounts")
-        ax.set_ylabel("Profit")
-        st.pyplot(fig)
+    # Revenue Contribution by Segment
+    segment_revenue = df_dummy.groupby('segment')['sales($)'].sum().sort_values(ascending=False)
+    st.bar_chart(segment_revenue)
 
-    # Recommendations and Insights
-    st.header("Recommendations and Insights")
-    st.subheader("Key Findings:")
-    st.write("""
-    - Focus on the top-performing products to maximize revenue.
-    - Evaluate the impact of discounts on profits for different segments.
-    - Identify underperforming products and assess the reasons behind their performance.
-    """)
+    # Profit Margin Comparison Across Segments
+    segment_profit_margin = df_dummy.groupby('segment').apply(
+        lambda x: (x['profit($)'].sum() / x['sales($)'].sum()) * 100 if x['sales($)'].sum() > 0 else 0)
+    st.bar_chart(segment_profit_margin)
+
+    st.subheader("Discount Impact Analysis")
+
+    # Impact of Discount Bands on Sales and Profitability
+    discount_impact = df_dummy.groupby('discount_band').agg({'sales($)': 'sum', 'profit($)': 'sum'})
+    st.bar_chart(discount_impact[['sales($)', 'profit($)']])
+
+    # Discount Effectiveness by Product and Month
+    discount_effectiveness = df_dummy.groupby(['discount_band', 'product', 'month_name'])['sales($)'].sum().reset_index()
+    discount_effectiveness_pivot = discount_effectiveness.pivot_table(index=['discount_band', 'product'],
+                                                                     columns='month_name', values='sales($)').fillna(0)
+    st.write("Discount Effectiveness Heatmap:")
+    st.pyplot(sns.heatmap(discount_effectiveness_pivot, annot=True, fmt=".0f", cmap='viridis'))
+
+    st.subheader("Country-Wise Comparison")
+
+    # Sales Performance Comparison Across Countries
+    country_sales = df_dummy.groupby('country')['sales($)'].sum().sort_values(ascending=False)
+    st.bar_chart(country_sales)
+
+    # Profitability Comparison Across Countries
+    country_profit = df_dummy.groupby('country')['profit($)'].sum().sort_values(ascending=False)
+    st.bar_chart(country_profit)
+
+    # Seasonal Variation in Sales
+    st.subheader("Seasonal Variation in Sales")
+    st.line_chart(df_dummy.groupby('month_name')['sales($)'].sum())
+
+    # Download cleaned data
+    st.download_button(label="Download Cleaned Data",
+                       data=df_dummy.to_csv(index=False).encode('utf-8'),
+                       file_name='cleaned_sales_data.csv',
+                       mime='text/csv')
+
 else:
-    st.info("Please upload a CSV file to proceed.")
+    st.info("Please upload a CSV file to begin analysis.")
