@@ -14,10 +14,10 @@ warnings.filterwarnings("ignore")
 
 # Load your data into `df_dummy`
 # Replace this example with your actual data loading method (e.g., file upload)
-st.sidebar.subheader("Upload Dataset")
-uploaded_file = st.sidebar.file_uploader("Choose file", type=["csv"])
+#st.sidebar.subheader("Upload Dataset")
+#uploaded_file = st.sidebar.file_uploader("Choose file", type=["csv"])
 if uploaded_file is not None:
-    df_dummy= pd.read_csv(uploaded_file)
+    df_dummy= pd.read_csv("df_dummy.csv")
     st.success("Data successfully loaded!")
 else:
     st.warning("Please upload a dataset to proceed.")
