@@ -16,7 +16,7 @@ warnings.filterwarnings("ignore")
 st.sidebar.subheader("Upload Dataset")
 uploaded_file = st.sidebar.file_uploader("Choose file", type=["csv"])
 if uploaded_file is not None:
-    df = pd.read_csv(uploaded_file)
+    df_dummy= pd.read_csv(uploaded_file)
     st.success("Data successfully loaded!")
 else:
     st.warning("Please upload a dataset to proceed.")
