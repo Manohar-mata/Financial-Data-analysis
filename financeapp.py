@@ -23,7 +23,7 @@ if df_dummy is not None:
 else:
     st.warning("Please upload a dataset to proceed.")
 
-if uploaded_file is not None:
+if df_dummy is not None:
     # Copy and clean data
 
     # Bar Chart: Sales by Product and Month
