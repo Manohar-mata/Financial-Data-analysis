@@ -23,49 +23,6 @@ else:
 
 if uploaded_file is not None:
     # Copy and clean data
-    df_dummy = df.copy()
-
-    # Cleaning columns to remove symbols and convert to numerical
-    cols_to_clean = [
-        "manufacturing_price($)",
-        "sale_price($)",
-        "gross_sales($)",
-        "discounts($)",
-        "sales($)",
-        "cogs($)",
-        "profit($)",
-        "units_sold($)"
-    ]
-    for col in cols_to_clean:
-        df_dummy[col] = (
-            df_dummy[col]
-            .str.replace("$", "", regex=False)
-            .str.replace(",", "", regex=False)
-            .str.replace("-", "0", regex=False)
-            .str.replace("(", "-", regex=False)
-            .str.replace(")", "", regex=False)
-            .str.strip()
-        )
-    df_dummy[cols_to_clean] = df_dummy[cols_to_clean].astype(float)
-    df_dummy["date"] = pd.to_datetime(df_dummy["date"], errors="coerce")
-
-    # Replace NaN in `profit($)` with the mean
-    df_dummy["profit($)"] = df_dummy["profit($)"].fillna(df_dummy["profit($)"].mean())
-
-    # Display the cleaned DataFrame
-    st.subheader("Cleaned Dataset")
-    st.write(df_dummy.head())
-
-    # Descriptive statistics
-    st.subheader("Descriptive Statistics")
-    st.write(df_dummy.describe())
-
-    # Numerical and Non-numerical column classification
-    num_col = df_dummy.select_dtypes(include=["int64", "float64"]).columns
-    non_num_col = df_dummy.select_dtypes(include=["object"]).columns
-    st.subheader("Column Classification")
-    st.write("Numerical Columns:", list(num_col))
-    st.write("Non-Numerical Columns:", list(non_num_col))
 
     # Bar Chart: Sales by Product and Month
     st.subheader("Sales by Product and Month")
