@@ -64,6 +64,7 @@ Geographical Insights: High-performing countries should be targeted for expansio
 Time-Based Trends: Months with declining profitability require targeted campaigns to boost sales.
 
 **5. Recommendations**
+
 Focus on high-performing products and segments for promotional campaigns.
 
 Optimize discount strategies to balance sales growth and profit margins.
