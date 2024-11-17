@@ -33,6 +33,7 @@ Aggregating metrics for visualization (e.g., total sales, total profit).
 Pivoting data to analyze trends and effectiveness of discounts.
 
 **3. Executive Summary**
+
 The dashboard leverages various visualizations to answer critical business questions:
 
 Which products drive the most sales and profits?
